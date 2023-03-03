@@ -13,13 +13,15 @@ class UsersRepository implements IUsersRepository {
         this.repository = postgresDataSource.getRepository(User);
     }
 
-    async create({ name, email, driver_license, password}:ICreateUserDTO): Promise<void> {
+    async create({ name, email, driver_license, password, id, avatar}:ICreateUserDTO): Promise<void> {
         
         const user = this.repository.create({
             name,
             email,
             driver_license,
-            password
+            password,
+            avatar,
+            id
         });
 
         await this.repository.save(user);
